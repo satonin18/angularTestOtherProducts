@@ -1,298 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mkyong</groupId>
+	<artifactId>spring3-mvc-maven-annotation-hello-world</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>spring3 mvc maven</name>
 
-    <groupId>test</groupId>
-    <artifactId>test</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+	<properties>
+		<jdk.version>1.6</jdk.version>
+		<spring.version>3.2.13.RELEASE</spring.version>
+		<jstl.version>1.2</jstl.version>
+		<servletapi.version>3.1.0</servletapi.version>
+	</properties>
 
-    <properties>
-        <hibernate.validator>5.4.2.Final</hibernate.validator>
-        <!--<hibernate.validator>6.0.2.Final</hibernate.validator>-->
-        <!--<hibernate.validator>4.2.0.Final</hibernate.validator>-->
-        <hibernate-validator-annotation-processor>6.0.2.Final</hibernate-validator-annotation-processor>
-        <!--<hibernate.version>4.3.11.Final</hibernate.version>-->
-        <!--<hibernate.version>5.2.11.Final</hibernate.version>-->
+	<dependencies>
 
-        <hibernate.entitymanager.version4>4.3.11.Final</hibernate.entitymanager.version4>
-        <hibernate.entitymanager.version5>5.2.11.Final</hibernate.entitymanager.version5>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
-        <!--<c3p0.version>0.9.5.2</c3p0.version>-->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
 
-        <spring.version>5.1.4.RELEASE</spring.version>
-        <!--<spring.version>4.0.1.RELEASE</spring.version>-->
+		<!-- compile only, deployed container will provide this -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servletapi.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
-        <jstl.version>1.2.1</jstl.version>
-        <tld.version>1.1.2</tld.version>
-        <servlets.version>3.1.0</servlets.version>
-        <jsp.version>2.3.1</jsp.version>
+	</dependencies>
 
-        <!--<java.version>1.8</java.version>-->
-        <java.version>8</java.version>
-        <!--<hsqldb.version>1.8.0.10</hsqldb.version>-->
-        <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
-    </properties>
+	<build>
 
-    <dependencies>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
 
-        <!-- Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.entitymanager.version4}</version>
-            <!--<version>${hibernate.entitymanager.version5}</version>-->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--этоа библеотека добавлена на сервер глассФиш -->
-        <!-- если запускать через томкат по пригодиться эта зависимость -->
-        <dependency>
-            <artifactId>jboss-logging</artifactId>
-            <groupId>org.jboss.logging</groupId>
-            <!--<version>3.3.1.Final</version>-->
-            <version>3.3.0.Final</version>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.11.v20150529</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/spring3</contextPath>
+					</webApp>
+				</configuration>
+			</plugin>
 
-            <!--default-->
-            <!--<scope>compile</scope>-->
-            <!--servlet-api-->
-            <!--<scope>provided</scope>-->
-            <!--log4j-->
-            <!--<scope>runtime</scope>-->
-            <!--(следует избегать)-->
-            <!--<scope>system</scope>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+					<wtpContextName>spring3</wtpContextName>
+				</configuration>
+			</plugin>
 
-            <!--default = необязательная зависимость-->
-            <!--<optional>false</optional>-->
-            <!--<optional>true</optional>-->
-        </dependency>
+		</plugins>
+	</build>
 
-        <!--GlassFish 5-->
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.10.0.pr1</version>
-        </dependency>
-        <!-- log4j2 -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-api</artifactId>-->
-        <!--<version>2.11.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-core</artifactId>-->
-        <!--<version>2.11.2</version>-->
-        <!--</dependency>-->
-
-        <!-- Validator -->
-        <!-- true Valid param Controller-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.validator}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-
-                <!--<exclusion>-->
-                <!--<artifactId>validation-api</artifactId>-->
-                <!--<groupId>javax.validation</groupId>-->
-                <!--</exclusion>-->
-            </exclusions>
-        </dependency>
-        <dependency>
-            <!--<groupId>org.hibernate</groupId>-->
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>${hibernate-validator-annotation-processor}</version>
-        </dependency>
-
-
-        <!-- Validator -> jsp -> win error -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <!--<version>2.0.0.Final</version>-->
-            <version>1.1.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.glassfish.web</groupId>-->
-        <!--<artifactId>javax.el</artifactId>-->
-        <!--<version>2.2.6</version>-->
-        <!--</dependency>-->
-
-        <!-- Servlet Dependency -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlets.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- JSP Dependency -->
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>${jsp.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- JSTL Dependency -->
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-            <version>${jstl.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>${tld.version}</version>
-        </dependency>
-
-        <!-- MYSQL Dependency -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
-        </dependency>
-
-
-
-        <!-- templates -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- test -->
-        <!--<dependency>-->
-        <!--<groupId>junit</groupId>-->
-        <!--<artifactId>junit</artifactId>-->
-        <!--<version>4.12</version>-->
-        <!--</dependency>-->
-
-        <!-- Hibernate-C3P0 Integration -->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-c3p0</artifactId>-->
-        <!--<version>${hibernate.version}</version>-->
-        <!--</dependency>-->
-        <!-- c3p0 -->
-        <!--<dependency>-->
-        <!--<groupId>com.mchange</groupId>-->
-        <!--<artifactId>c3p0</artifactId>-->
-        <!--<version>${c3p0.version}</version>-->
-        <!--</dependency>-->
-
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- Spring ORM -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jboss-logging</artifactId>
-                    <groupId>org.jboss.logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- Spring Security -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- Spring MVC Dependency -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- Spring DATA -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-            <version>2.1.3.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jboss-logging</artifactId>
-                    <groupId>org.jboss.logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>2.1.8.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jboss-logging</artifactId>
-                    <groupId>org.jboss.logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-
-            <!-- NO WORK ! -->
-            <!-- Embedded Apache Tomcat required for testing war -->
-            <!--<plugin>-->
-            <!--<groupId>org.apache.tomcat.maven</groupId>-->
-            <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
-            <!--<version>2.2</version>-->
-            <!--<configuration>-->
-            <!--<path>/</path>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-        </plugins>
-    </build>
 </project>

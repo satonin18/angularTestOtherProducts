@@ -38,8 +38,8 @@ module.exports = {
   output: {
     // filename: 'ng_app.js', //polyfills
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
-      //пока сам ручками перенес скомпилированные файлы
+    path: path.resolve(__dirname, '../webapp/resources/core/js')
+      //кладем в джарник для будущего сервера
   },
 
   // plugins: [

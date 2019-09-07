@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      // "outDir": "./dist/",
+      "noImplicitAny": true,
+      "module": "es2015",
+      "target": "es5",
+      "allowJs": true,
+
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "lib": [ "es2015", "dom" ],
+
+      "suppressImplicitAnyIndexErrors": true,
+      "typeRoots": [
+        "node_modules/@types/"
+      ],
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true
+    },
+
+    "exclude": [
+        "node_modules"
+    ]
+}

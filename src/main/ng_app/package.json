@@ -1,0 +1,39 @@
+{
+  "name": "webpack-sample",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "satonin18",
+  "license": "ISC",
+  "description": "Angular 8 Project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server",
+    "build": "webpack",
+    "dev": "webpack-dev-server --hot --open"
+  },
+  "dependencies": {
+    "@angular/common": "~8.0.0",
+    "@angular/compiler": "~8.0.0",
+    "@angular/core": "~8.0.0",
+    "@angular/forms": "~8.0.0",
+    "@angular/platform-browser": "~8.0.0",
+    "@angular/platform-browser-dynamic": "~8.0.0",
+    "@angular/router": "~8.0.0",
+    "core-js": "^3.1.3",
+    "rxjs": "^6.5.2",
+    "zone.js": "^0.9.1"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4",
+    "ts-loader": "^4.5.0",
+    "typescript": "^3.5.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
+    "@types/node": "^12.0.0",
+    "angular2-template-loader": "^0.6.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "raw-loader": "0.5.1",
+    "html-loader": "0.5.1",
+    "webpack-dev-server": "3.4.1"
+  }
+}

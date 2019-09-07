@@ -20,8 +20,8 @@
 
 <div id="content">
 	<h1>Welcome</h1>
-    <div id="map"></div>
-
+	<my-app>Загрузка...</my-app>
+	<div id="map"></div>
 </div>
 <hr>
 <footer>
@@ -31,11 +31,15 @@
 <spring:url value="/resources/core/js/hello.js" var="coreJs" />
 <spring:url value="/resources/core/js/bootstrap.min.js" var="bootstrapJs" />
 <spring:url value="/resources/core/js/open_layers.e0ff072e.js" var="open_layersJs" />
+<spring:url value="/resources/core/js/polyfills.js" var="polyfillsJs" />
+<spring:url value="/resources/core/js/ng_app.js" var="ng_appJs" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${bootstrapJs}"></script>
 <script src="${coreJs}"></script>
 <script src="${open_layersJs}"></script>
+<script src="${polyfillsJs}"></script>
+<script src="${ng_appJs}"></script>
 
 </body>
 </html>
